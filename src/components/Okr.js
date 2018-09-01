@@ -14,11 +14,12 @@ class Okr extends Component {
             Header: props => (
                 <h5>{this.props.data.objective}</h5>        
             ),
-            accessor: 'text'
+            accessor: 'text',
+            minWidth: 400
         }, {
             id: 'goalCompletion',
             Header: 'Current / Goal',
-            accessor: d => `0 / ${d.goal.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}`
+            accessor: d => `0 / ${d.goal.toLocaleString('en-US', { style: d.dataType, currency: 'USD' })}`
         }, {
             id: 'progress',
             Header: 'Progress',
@@ -27,7 +28,7 @@ class Okr extends Component {
         console.log(this.props.data);
         return (
             <div className="Okr">
-                <ReactTable data={this.props.data.keyResults} columns={columns} />
+                <ReactTable data={this.props.data.keyResults} columns={columns} showPagination={false} pageSize={3} />
             </div>
         );
     }
