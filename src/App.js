@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import Okr from './components/Okr';
+import DeptOkr from './components/DeptOkr';
 import logo from './logo.svg';
+import 'react-table/react-table.css';
+import jsonData from './sampleData';
 import './App.css';
 
 class App extends Component {
@@ -11,8 +13,10 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
-
-        <Okr />
+        {jsonData.map((dept, index) => {
+          return <DeptOkr key={dept.department} dept={dept}/>
+        })}
+        
 
       </div>
     );

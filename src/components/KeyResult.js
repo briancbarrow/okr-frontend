@@ -1,4 +1,5 @@
-import React, { Component } from 'react';;
+import React, { Component } from 'react';
+import { StyleSheet, css } from 'aphrodite';
 
 class KeyResult extends Component {
     render(props) {
@@ -15,5 +16,9 @@ class KeyResult extends Component {
         );
     }
 }
+
+const styles = StyleSheet.create({
+    
+});
 
 export default KeyResult;

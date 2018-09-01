@@ -1,27 +1,39 @@
 import React, { Component } from 'react';
 import KeyResult from './KeyResult';
+import ReactTable from 'react-table';
 import { StyleSheet, css } from 'aphrodite';
 
 class Okr extends Component {
     render(props) {
+        const columns = [{
+            id: 'krLabel',
+            Header: 'O',
+            accessor: () => 'KR'
+        }, {
+            // id: 'keyResult',
+            Header: props => (
+                <h5>{this.props.data.objective}</h5>        
+            ),
+            accessor: 'text'
+        }, {
+            id: 'goalCompletion',
+            Header: 'Current / Goal',
+            accessor: d => `0 / ${d.goal.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}`
+        }, {
+            id: 'progress',
+            Header: 'Progress',
+            accessor: () => '0%'
+        }]
+        console.log(this.props.data);
         return (
             <div className="Okr">
-                <div className={css(styles.objective)}>
-                    <div className={css(styles.objectiveHeader)}>
-                        <p className={css(styles.objectiveBullet)}>O</p>
-                        <h4 className={css(styles.objectiveName)}>Acheive record year over year revenues</h4>
-                        <p className={css(styles.objectivePercentage)}>0%</p>
-
-                    </div>
-                    <div className="key-results">
-                        <KeyResult />
-                        <KeyResult />
-                    </div>
-                </div>
+                <ReactTable data={this.props.data.keyResults} columns={columns} />
             </div>
         );
     }
 }
+
+
 
 const styles = StyleSheet.create({
     objective: {
@@ -42,6 +54,14 @@ const styles = StyleSheet.create({
     objectivePercentage: {
         color: '#cc0101',
         fontWeight: 500,
+    },
+    krLabels: {
+        fontSize: '0.9rem',
+        color: 'darkgray'
+    },
+    keyResults: {
+        display: 'flex',
+        flexDirection: 'column'
     }
 });
 
